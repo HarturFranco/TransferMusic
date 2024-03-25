@@ -4,6 +4,10 @@ import torchaudio
 import pandas as pd
 import os
 
+ANNOTATIONS_FILE = "/home/rthr/Documentos/UFMG/2024-1/TransferMusic/Data/GTZAN/features_30_sec.csv"
+AUDIO_DIR = "/home/rthr/Documentos/UFMG/2024-1/TransferMusic/Data/GTZAN/genres_original"
+SAMPLE_RATE = 16000
+NUM_SAMPLES = 696319
 
 class GtzanDataset(Dataset):
 
@@ -78,10 +82,10 @@ class GtzanDataset(Dataset):
 if __name__ == "__main__":
     # USAGE EXAMPLE
 
-    ANNOTATIONS_FILE = "/path/to/annotation/file.csv"
-    AUDIO_DIR = "path/to/audio_files/direct"
-    SAMPLE_RATE = 16000
-    NUM_SAMPLES = 22050
+    # ANNOTATIONS_FILE = "/path/to/annotation/file.csv"
+    # AUDIO_DIR = "path/to/audio_files/direct"
+    # SAMPLE_RATE = 16000
+    # NUM_SAMPLES = 22050
 
     if torch.cuda.is_available():
         device = "cuda"
@@ -91,9 +95,9 @@ if __name__ == "__main__":
 
     mel_spactrogram = torchaudio.transforms.MelSpectrogram(
         sample_rate=SAMPLE_RATE,
-        n_fft=1024,
+        n_fft=2048,
         hop_length=512,
-        n_mels=64
+        n_mels=96
     )
 
 
@@ -108,3 +112,4 @@ if __name__ == "__main__":
     print(f"There are {len(dataset)} samples in the dataset.")
 
     signal, label = dataset[0]
+    print(dataset[0][0].shape)

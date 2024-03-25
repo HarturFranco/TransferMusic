@@ -8,10 +8,10 @@ from customConvNet import CustomConvNet
 BATCH_SIZE = 128
 EPOCHS = 10
 LEARNING_RATE = .001
-ANNOTATIONS_FILE = "/path/to/annotation/file.csv"
-AUDIO_DIR = "path/to/audio_files/direct"
+ANNOTATIONS_FILE = "/home/rthr/Documentos/UFMG/2024-1/TransferMusic/Data/GTZAN/features_30_sec.csv"
+AUDIO_DIR = "/home/rthr/Documentos/UFMG/2024-1/TransferMusic/Data/GTZAN/genres_original"
 SAMPLE_RATE = 16000
-NUM_SAMPLES = 81920
+NUM_SAMPLES = 696319
 
 def create_data_loader(train_data, batch_size):
   train_dataloader = DataLoader(train_data, batch_size=batch_size)
@@ -19,7 +19,10 @@ def create_data_loader(train_data, batch_size):
 
 def train_one_epoch(model, data_loader, loss_fn, optimiser, device):
   for inputs, targets in data_loader:
-    inputs, targets = inputs.to(device), targets.to(device)
+    # print(f"inputs {inputs.shape}")
+    inputs = inputs.to(device)
+    targets = targets.to(device)
+    # inputs, targets = inputs.to(device), targets.to(device)
     # Calculate loss
     predictions = model(inputs)
     loss = loss_fn(predictions, targets)
