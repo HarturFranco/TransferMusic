@@ -30,6 +30,7 @@ class GtzanDataset(Dataset):
         audio_sample_path = self._get_audio_sample_path(index)
         label = self._get_audio_sample_label(index)
         signal, sr = torchaudio.load(audio_sample_path)
+        signal = signal.to(self.device)
         signal = self._resample_if_necessary(signal, sr)
         signal = self._mix_down_if_necessary(signal)
         signal = self._right_pad_if_necessary(signal)
