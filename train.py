@@ -5,8 +5,8 @@ from torch.utils.data import DataLoader
 from gtzanDataset import GtzanDataset
 from customConvNet import CustomConvNet
 
-BATCH_SIZE = 128
-EPOCHS = 10
+BATCH_SIZE = 8
+EPOCHS = 32
 LEARNING_RATE = .001
 ANNOTATIONS_FILE = "/home/rthr/Documentos/UFMG/2024-1/TransferMusic/Data/GTZAN/features_30_sec.csv"
 AUDIO_DIR = "/home/rthr/Documentos/UFMG/2024-1/TransferMusic/Data/GTZAN/genres_original"
@@ -21,8 +21,8 @@ def train_one_epoch(model, data_loader, loss_fn, optimiser, device):
   for inputs, targets in data_loader:
     inputs, targets = inputs.to(device), targets.to(device)
     
-    print(f"inputsT {type(inputs)}")
-    print(f"targetsT {type(targets)}")
+    # print(f"inputsT {type(inputs)}")
+    # print(f"targetsT {type(targets)}")
     # Calculate loss
     predictions = model(inputs)
     loss = loss_fn(predictions, targets)
