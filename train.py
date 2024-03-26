@@ -19,10 +19,10 @@ def create_data_loader(train_data, batch_size):
 
 def train_one_epoch(model, data_loader, loss_fn, optimiser, device):
   for inputs, targets in data_loader:
-    # print(f"inputs {inputs.shape}")
-    inputs = inputs.to(device)
-    targets = targets.to(device)
-    # inputs, targets = inputs.to(device), targets.to(device)
+    inputs, targets = inputs.to(device), targets.to(device)
+    
+    print(f"inputsT {type(inputs)}")
+    print(f"targetsT {type(targets)}")
     # Calculate loss
     predictions = model(inputs)
     loss = loss_fn(predictions, targets)

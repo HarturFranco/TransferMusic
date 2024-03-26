@@ -9,6 +9,33 @@ AUDIO_DIR = "/home/rthr/Documentos/UFMG/2024-1/TransferMusic/Data/GTZAN/genres_o
 SAMPLE_RATE = 16000
 NUM_SAMPLES = 696319
 
+lbl2idx = {
+    "blues": 0,
+    "classical": 1,
+    "country": 2,
+    "disco": 3,
+    "hiphop": 4,
+    "jazz": 5,
+    "metal": 6,
+    "pop": 7,
+    "reggae": 8,
+    "rock": 9,
+}
+
+idx2lbl = {
+    0: "blues",
+    1: "classical",
+    2: "country",
+    3: "disco",
+    4: "hiphop",
+    5: "jazz",
+    6: "metal",
+    7: "pop",
+    8: "reggae",
+    9: "rock",
+}
+
+
 class GtzanDataset(Dataset):
 
     def __init__(
@@ -49,7 +76,7 @@ class GtzanDataset(Dataset):
         return path
 
     def _get_audio_sample_label(self, index):
-        return self.annotations.iloc[index, 59]
+        return lbl2idx[self.annotations.iloc[index, 59]]
 
     def _resample_if_necessary(self, signal, sr):
         if sr != self.target_sample_rate:
